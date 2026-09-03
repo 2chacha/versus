@@ -1,0 +1,629 @@
+{
+  "_note": "v0.5 draft — fan-curated approximate stats for engine testing only. tierScore ladder: street0 / city_block10 / city20 / country35 / continent45 / planet55 / star65 / universal75 / multiversal85. Tag vocabulary shared between haxTraits[].type and resistances[]: time_stop, time_loop_reset, causality_erasure, universal_reset, instant_kill_conditional, mental_domination, space_cutting, domain_sure_hit, reality_warping, devil_fruit_nullify, haoshoku_haki. DIO(dio_p3) removed per user request. haki_bypass reserved for a future true-Logia-intangibility character.",
+  "characters": [
+    {
+      "id": "giorno_p5",
+      "name": "죠르노 죠바나",
+      "universe": "JoJo's Bizarre Adventure",
+      "arc": "5부 황금의 바람",
+      "tier": "continent",
+      "stats": {
+        "power": 7,
+        "speed": 7.5,
+        "durability": 7,
+        "regeneration": 7.5,
+        "battleIQ": 8.5
+      },
+      "haxTraits": [
+        {
+          "type": "causality_erasure",
+          "label": "골드 익스피리언스 레퀴엠 - 행동을 무(無)로 되돌림",
+          "mechanism": "상대의 행동/결과를 인과 자체에서 지워 애초에 없었던 일로 되돌림 (사후 무효화형 — 이미 벌어진 일을 없앰)",
+          "potency": 20
+        }
+      ],
+      "resistances": [
+        "instant_kill_conditional",
+        "time_stop",
+        "domain_sure_hit",
+        "mental_domination",
+        "space_cutting"
+      ],
+      "_resistanceNote": "GER은 공격형 헤스가 아니라 '상대 행동을 무효화'하는 성격이라 태그 체계상 haxTraits 한 줄(+15)보다 resistances를 넓게 갖는 쪽이 원작에 맞음. 단, 같은 causality_erasure 계열(나루토 바이런 모드)까지 자동 무효화하진 않음 — 동급 소거 능력끼리는 대등하게 상쇄되도록 남겨둠.",
+      "avatar": "/characters/giorno_p5.jpg"
+    },
+    {
+      "id": "pucci_p6",
+      "name": "엔리코 푸치",
+      "universe": "JoJo's Bizarre Adventure",
+      "arc": "6부 스톤 오션",
+      "tier": "universal",
+      "stats": {
+        "power": 8,
+        "speed": 9.5,
+        "durability": 7,
+        "regeneration": 6,
+        "battleIQ": 8.5
+      },
+      "haxTraits": [
+        {
+          "type": "universal_reset",
+          "label": "메이드 인 헤븐 - 시간가속/우주 리셋",
+          "mechanism": "우주의 시간을 극한까지 가속시켜 우주를 끝낸 뒤 새 우주로 재시작하며 그 과정에서 자신만 우위를 점함 (거시적 리셋형 — 개인이 아니라 우주 자체를 갈아엎음)",
+          "potency": 20
+        }
+      ],
+      "resistances": [],
+      "avatar": "/characters/pucci_p6.jpg"
+    },
+    {
+      "id": "naruto",
+      "name": "우즈마키 나루토",
+      "universe": "나루토",
+      "arc": "-",
+      "tier": "planet",
+      "stats": {
+        "power": 8.5,
+        "speed": 8,
+        "durability": 8,
+        "regeneration": 8,
+        "battleIQ": 7.5
+      },
+      "haxTraits": [
+        {
+          "type": "causality_erasure",
+          "label": "바이런 모드 - 접촉한 대상의 차크라/존재 소멸",
+          "mechanism": "접촉한 대상의 차크라와 존재 자체를 그 자리에서 완전히 소멸시킴 (접촉 즉시 소멸형 — 존재를 지움)",
+          "potency": 20
+        }
+      ],
+      "resistances": [
+        "instant_kill_conditional",
+        "mental_domination"
+      ],
+      "avatar": "/characters/naruto.jpg"
+    },
+    {
+      "id": "sasuke",
+      "name": "우치하 사스케",
+      "universe": "나루토",
+      "arc": "-",
+      "tier": "continent",
+      "stats": {
+        "power": 7.5,
+        "speed": 8.5,
+        "durability": 6.5,
+        "regeneration": 5,
+        "battleIQ": 9
+      },
+      "haxTraits": [
+        {
+          "type": "space_cutting",
+          "label": "카무이 - 공간 흡수/전이",
+          "mechanism": "차원 자체를 갈라 대상을 다른 공간으로 흡수·전이시킴 (공간 흡수형 — 직접 죽이지 않고 격리시킴)",
+          "potency": 15
+        },
+        {
+          "type": "mental_domination",
+          "label": "사륜안 계열 환술",
+          "mechanism": "시각을 통한 환술로 상대의 정신을 조작·구속함 (시야 매개형 — 사륜안을 직접 봐야 성립)",
+          "potency": 10
+        }
+      ],
+      "resistances": [],
+      "avatar": "/characters/sasuke.jpg"
+    },
+    {
+      "id": "madara",
+      "name": "우치하 마다라",
+      "universe": "나루토",
+      "arc": "-",
+      "tier": "planet",
+      "stats": {
+        "power": 9,
+        "speed": 8,
+        "durability": 8.5,
+        "regeneration": 8.5,
+        "battleIQ": 8.5
+      },
+      "haxTraits": [
+        {
+          "type": "reality_warping",
+          "label": "무한 츠쿠요미 - 세계 지배급 술법",
+          "mechanism": "달빛을 매개로 전 세계 인구를 동시에 환술에 가둬 물리법칙 수준의 지배력을 행사함 (광역 환술형 — 개인이 아니라 세계 전체를 대상으로 함)",
+          "potency": 20
+        },
+        {
+          "type": "space_cutting",
+          "label": "카무이 계승 - 공간 흡수",
+          "mechanism": "사스케의 카무이를 계승한 동일 계열의 공간 흡수·전이 (공간 흡수형)",
+          "potency": 15
+        }
+      ],
+      "resistances": [
+        "instant_kill_conditional"
+      ],
+      "avatar": "/characters/madara.jpg"
+    },
+    {
+      "id": "luffy_g5",
+      "name": "몽키 D. 루피 (기어5)",
+      "universe": "원피스",
+      "arc": "-",
+      "tier": "planet",
+      "stats": {
+        "power": 8.5,
+        "speed": 8.5,
+        "durability": 7.5,
+        "regeneration": 6,
+        "battleIQ": 6.5
+      },
+      "haxTraits": [
+        {
+          "type": "reality_warping",
+          "label": "니카의 힘 - 만화적 물리법칙 초월",
+          "mechanism": "본인과 주변의 물리법칙을 만화적으로 재정의해 통증·손상·인과 자체를 무력화함 (룰 변형형 — 세계의 '규칙'을 자기 편의대로 다시 씀)",
+          "potency": 20
+        }
+      ],
+      "resistances": [
+        "mental_domination"
+      ],
+      "avatar": "/characters/luffy_g5.jpg"
+    },
+    {
+      "id": "kaido",
+      "name": "카이도",
+      "universe": "원피스",
+      "arc": "-",
+      "tier": "continent",
+      "stats": {
+        "power": 9.5,
+        "speed": 6.5,
+        "durability": 9.5,
+        "regeneration": 7,
+        "battleIQ": 7
+      },
+      "haxTraits": [],
+      "_haxNote": "우오우오의 열매는 신화 조에(용)이지 로기아가 아님 — 무형화 계열 헤스 없이 순수 스탯(파괴력/내구)로만 반영",
+      "resistances": [
+        "instant_kill_conditional"
+      ],
+      "avatar": "/characters/kaido.jpg"
+    },
+    {
+      "id": "blackbeard",
+      "name": "마샬 D. 티치 (블랙비어드)",
+      "universe": "원피스",
+      "arc": "-",
+      "tier": "country",
+      "stats": {
+        "power": 8,
+        "speed": 5.5,
+        "durability": 6.5,
+        "regeneration": 5,
+        "battleIQ": 7.5
+      },
+      "haxTraits": [
+        {
+          "type": "devil_fruit_nullify",
+          "label": "야미야미의 열매 - 접촉한 상대의 악마의 열매 능력 무효화/흡수",
+          "mechanism": "접촉한 상대의 악마의 열매 능력을 중력처럼 끌어당겨 무효화·흡수함 (접촉 흡수형 — 흡수한 능력을 자신도 사용 가능)",
+          "potency": 15
+        }
+      ],
+      "_haxNote": "야미야미는 로기아지만 유일하게 무형화 혜택이 없어 물리 공격이 통하는 예외 케이스 — 그래서 resistances는 비워둠(원작 설정상 약점)",
+      "resistances": [],
+      "avatar": "/characters/blackbeard.jpg"
+    },
+    {
+      "id": "gojo",
+      "name": "고죠 사토루",
+      "universe": "주술회전",
+      "arc": "-",
+      "tier": "country",
+      "stats": {
+        "power": 8,
+        "speed": 8,
+        "durability": 8.5,
+        "regeneration": 7,
+        "battleIQ": 9
+      },
+      "haxTraits": [
+        {
+          "type": "domain_sure_hit",
+          "label": "무량공처 - 영역전개, 정보과부하 확정 명중",
+          "mechanism": "영역전개로 가둔 뒤 무한한 정보량을 뇌에 주입해 필중으로 기능정지시킴 (감각 과부하형 — 물리적 파괴가 아니라 뇌 기능 정지)",
+          "potency": 20
+        }
+      ],
+      "resistances": [],
+      "avatar": "/characters/gojo.jpg"
+    },
+    {
+      "id": "sukuna",
+      "name": "료멘 스쿠나",
+      "universe": "주술회전",
+      "arc": "-",
+      "tier": "country",
+      "stats": {
+        "power": 9,
+        "speed": 8.5,
+        "durability": 8,
+        "regeneration": 8.5,
+        "battleIQ": 8.5
+      },
+      "haxTraits": [
+        {
+          "type": "space_cutting",
+          "label": "해체 - 접촉 없이 베는 참격",
+          "mechanism": "접촉 없이 허공을 갈라 베는 원거리 참격 (원거리 참격형 — 사거리 안이면 회피 난이도가 매우 높음)",
+          "potency": 15
+        },
+        {
+          "type": "domain_sure_hit",
+          "label": "복마어전 - 도메인 확정 절단",
+          "mechanism": "영역전개로 가둔 뒤 무조건 명중하는 참격을 퍼부음 (물리 확정타형 — 고죠와 달리 정신이 아니라 육체를 직접 파괴)",
+          "potency": 20
+        }
+      ],
+      "resistances": [
+        "instant_kill_conditional"
+      ],
+      "avatar": "/characters/sukuna.jpg"
+    },
+    {
+      "id": "yuta",
+      "name": "옷코츠 유타",
+      "universe": "주술회전",
+      "arc": "-",
+      "tier": "country",
+      "stats": {
+        "power": 8,
+        "speed": 8,
+        "durability": 7.5,
+        "regeneration": 7,
+        "battleIQ": 8
+      },
+      "haxTraits": [
+        {
+          "type": "domain_sure_hit",
+          "label": "복사 술식 + 리카 - 광역 확정 공격",
+          "mechanism": "리카의 복사 술식으로 다중 영역·다중 확정공격을 동시에 전개함 (물량 확정타형 — 확정타 자체를 여러 겹으로 중첩시킴)",
+          "potency": 15
+        }
+      ],
+      "resistances": [],
+      "avatar": "/characters/yuta.jpg"
+    },
+    {
+      "id": "itachi",
+      "name": "우치하 이타치",
+      "universe": "나루토",
+      "arc": "-",
+      "tier": "country",
+      "stats": {
+        "power": 7,
+        "speed": 8,
+        "durability": 6,
+        "regeneration": 4,
+        "battleIQ": 9.5
+      },
+      "haxTraits": [
+        {
+          "type": "mental_domination",
+          "label": "츠쿠요미 - 초정밀 정신 고문형 환술",
+          "mechanism": "환술 세계 안에서 상대에게 극한의 정신적 고통을 압축된 시간 동안 가함 (심리 고문형 — 육체는 그대로 두고 정신만 파괴)",
+          "potency": 15
+        },
+        {
+          "type": "domain_sure_hit",
+          "label": "아마테라스 - 시야에 닿으면 회피 불가능한 흑염",
+          "mechanism": "시야에 들어온 대상을 따라다니며 절대 꺼지지 않는 검은 불꽃으로 태움 (추적 확정타형 — 회피해도 계속 쫓아옴)",
+          "potency": 15
+        }
+      ],
+      "resistances": [],
+      "avatar": "/characters/itachi.jpg"
+    },
+    {
+      "id": "jiraiya",
+      "name": "지라이야",
+      "universe": "나루토",
+      "arc": "-",
+      "tier": "country",
+      "stats": {
+        "power": 6.5,
+        "speed": 6,
+        "durability": 6.5,
+        "regeneration": 4.5,
+        "battleIQ": 8
+      },
+      "haxTraits": [],
+      "resistances": [],
+      "avatar": "/characters/jiraiya.jpg"
+    },
+    {
+      "id": "shanks",
+      "name": "샹크스",
+      "universe": "원피스",
+      "arc": "-",
+      "tier": "continent",
+      "stats": {
+        "power": 8,
+        "speed": 7.5,
+        "durability": 7.5,
+        "regeneration": 5,
+        "battleIQ": 8.5
+      },
+      "haxTraits": [
+        {
+          "type": "haoshoku_haki",
+          "label": "패왕색 패기 - 접촉 없이 광역 기절/위압",
+          "mechanism": "접촉 없이 광역으로 의지력을 발산해 의지가 약한 자들을 기절시킴 (위압형 — 공격이 아니라 정신력 대결에 가까움)",
+          "potency": 15
+        }
+      ],
+      "_haxNote": "haoshoku_haki는 이번에 신설한 태그 - 접촉 없이 광역으로 상대를 기절시키는 패왕색 패기 특유의 효과라 기존 정신지배(mental_domination, 환술/최면형)와 결이 달라 분리함",
+      "resistances": [
+        "mental_domination"
+      ],
+      "avatar": "/characters/shanks.jpg"
+    },
+    {
+      "id": "ichigo",
+      "name": "쿠로사키 이치고",
+      "universe": "블리치",
+      "arc": "-",
+      "tier": "planet",
+      "stats": {
+        "power": 8.5,
+        "speed": 8.5,
+        "durability": 8,
+        "regeneration": 7,
+        "battleIQ": 7
+      },
+      "haxTraits": [
+        {
+          "type": "space_cutting",
+          "label": "참월/진월 - 개념·방어를 가르는 참격",
+          "mechanism": "칼날의 참격 자체가 방어·개념을 가리지 않고 갈라버림 (개념 절단형 — 물리 방어뿐 아니라 능력적 방어까지 관통)",
+          "potency": 15
+        }
+      ],
+      "resistances": [
+        "instant_kill_conditional"
+      ],
+      "avatar": "/characters/ichigo.jpg"
+    },
+    {
+      "id": "aizen",
+      "name": "아이젠 소스케",
+      "universe": "블리치",
+      "arc": "-",
+      "tier": "continent",
+      "stats": {
+        "power": 7,
+        "speed": 7.5,
+        "durability": 7.5,
+        "regeneration": 9,
+        "battleIQ": 10
+      },
+      "haxTraits": [
+        {
+          "type": "mental_domination",
+          "label": "쿄카스이가츠 - 완전 절대 최면",
+          "mechanism": "칼을 본 순간부터 상대의 오감 전체를 완전히 지배해 무엇이든 다르게 지각시킴 (완전 감각 지배형 — 정신뿐 아니라 오감 자체를 통제)",
+          "potency": 20
+        },
+        {
+          "type": "reality_warping",
+          "label": "호교쿠 초월체 - 신적 존재로의 변용",
+          "mechanism": "호교쿠와 융합해 신적 존재로 초월, 존재 규격 자체를 상위 단계로 바꿈 (자기 초월형 — 세계가 아니라 자기 자신의 격을 바꿈)",
+          "potency": 15
+        }
+      ],
+      "resistances": [
+        "instant_kill_conditional"
+      ],
+      "avatar": "/characters/aizen.jpg"
+    },
+    {
+      "id": "yhwach",
+      "name": "유하바하",
+      "universe": "블리치",
+      "arc": "-",
+      "tier": "star",
+      "stats": {
+        "power": 8,
+        "speed": 6,
+        "durability": 8.5,
+        "regeneration": 8,
+        "battleIQ": 10
+      },
+      "haxTraits": [
+        {
+          "type": "causality_erasure",
+          "label": "올마이티 - 모든 미래를 지각해 불리한 결과를 무효화",
+          "mechanism": "모든 가능한 미래를 미리 지각해 자신에게 불리한 결과만 선택적으로 회피·재선택함 (사전 예지·회피형 — 애초에 나쁜 미래를 고르지 않음)",
+          "potency": 20
+        }
+      ],
+      "_haxNote": "죠르노의 GER과 기능적으로 유사한 '결과 무효화' 계열 causality_erasure로 태깅함 — 같은 태그를 공유하므로 죠르노와 맞붙으면 서로 상쇄되고 스탯/티어 격차로 승부가 갈림 (설계 의도대로)",
+      "resistances": [
+        "mental_domination",
+        "instant_kill_conditional"
+      ],
+      "avatar": "/characters/yhwach.jpg"
+    },
+    {
+      "id": "afo",
+      "name": "올 포 원",
+      "universe": "나의 히어로 아카데미아",
+      "arc": "-",
+      "tier": "country",
+      "stats": {
+        "power": 7.5,
+        "speed": 5.5,
+        "durability": 7,
+        "regeneration": 6,
+        "battleIQ": 9.5
+      },
+      "haxTraits": [
+        {
+          "type": "devil_fruit_nullify",
+          "label": "개성 강탈 - 접촉한 상대의 개성을 빼앗아 흡수",
+          "mechanism": "접촉한 상대의 능력을 강제로 빼앗아 자신의 것으로 만듦 (접촉 강탈형 — 블랙비어드와 달리 원 소유자에게서 완전히 박탈)",
+          "potency": 15
+        }
+      ],
+      "_haxNote": "devil_fruit_nullify 태그를 원피스 외 작품에도 재사용 — '접촉 시 상대 능력을 무효화·흡수'라는 범용 메커니즘이라 태그명은 그대로 두되 의미는 작품 한정이 아님",
+      "resistances": [],
+      "avatar": "/characters/afo.jpg"
+    },
+    {
+      "id": "shigaraki",
+      "name": "시가라키 테스가 (최종)",
+      "universe": "나의 히어로 아카데미아",
+      "arc": "-",
+      "tier": "continent",
+      "stats": {
+        "power": 9,
+        "speed": 6.5,
+        "durability": 7.5,
+        "regeneration": 6.5,
+        "battleIQ": 7.5
+      },
+      "haxTraits": [
+        {
+          "type": "instant_kill_conditional",
+          "label": "부식 - 접촉한 물질을 순식간에 붕괴",
+          "mechanism": "접촉한 모든 물질을 즉시 원자 단위로 붕괴시킴 (접촉 붕괴형 — 생물이든 무생물이든 예외 없음)",
+          "potency": 15
+        }
+      ],
+      "resistances": [],
+      "avatar": "/characters/shigaraki.jpg"
+    },
+    {
+      "id": "deku",
+      "name": "미도리야 이즈쿠 (최종)",
+      "universe": "나의 히어로 아카데미아",
+      "arc": "-",
+      "tier": "continent",
+      "stats": {
+        "power": 8.5,
+        "speed": 9,
+        "durability": 7,
+        "regeneration": 5,
+        "battleIQ": 8
+      },
+      "haxTraits": [],
+      "resistances": [
+        "instant_kill_conditional"
+      ],
+      "_note": "데인저 센스로 치명타성 공격을 사전에 감지·회피",
+      "avatar": "/characters/deku.jpg"
+    },
+    {
+      "id": "muzan",
+      "name": "키부츠지 무잔",
+      "universe": "귀멸의 칼날",
+      "arc": "-",
+      "tier": "country",
+      "stats": {
+        "power": 8,
+        "speed": 7.5,
+        "durability": 8,
+        "regeneration": 9.5,
+        "battleIQ": 8
+      },
+      "haxTraits": [
+        {
+          "type": "instant_kill_conditional",
+          "label": "혈귀술 - 체내 이식형 독/개조로 절명",
+          "mechanism": "혈액을 통해 상대의 몸에 이식한 살점/독성 세포로 서서히 죽이거나 개조함 (생체 이식형 — 즉발이 아니라 잠복 후 발동)",
+          "potency": 10
+        }
+      ],
+      "resistances": [
+        "instant_kill_conditional"
+      ],
+      "avatar": "/characters/muzan.jpg"
+    },
+    {
+      "id": "yoriichi",
+      "name": "츠기쿠니 요리이치",
+      "universe": "귀멸의 칼날",
+      "arc": "-",
+      "tier": "continent",
+      "stats": {
+        "power": 9,
+        "speed": 9.5,
+        "durability": 7.5,
+        "regeneration": 4,
+        "battleIQ": 7.5
+      },
+      "haxTraits": [
+        {
+          "type": "space_cutting",
+          "label": "해의 호흡 - 하늘까지 가르는 참격",
+          "mechanism": "단 한 번의 참격으로 대기와 하늘까지 갈라버릴 정도의 참격 스케일 (초광역 참격형 — 인간이면서 물리 스케일 자체가 다름)",
+          "potency": 15
+        }
+      ],
+      "resistances": [],
+      "avatar": "/characters/yoriichi.jpg"
+    },
+    {
+      "id": "kokushibo",
+      "name": "코쿠시보",
+      "universe": "귀멸의 칼날",
+      "arc": "-",
+      "tier": "continent",
+      "stats": {
+        "power": 8.5,
+        "speed": 8.5,
+        "durability": 8,
+        "regeneration": 8,
+        "battleIQ": 8
+      },
+      "haxTraits": [
+        {
+          "type": "space_cutting",
+          "label": "달의 호흡 - 다중 참격",
+          "mechanism": "여러 개의 달이 뜨는 것처럼 다중 방향에서 동시에 참격을 전개함 (다중 참격형)",
+          "potency": 15
+        }
+      ],
+      "resistances": [
+        "instant_kill_conditional"
+      ],
+      "avatar": "/characters/kokushibo.jpg"
+    },
+    {
+      "id": "johnny",
+      "name": "죠니 죠스타",
+      "universe": "JoJo's Bizarre Adventure",
+      "arc": "7부 스틸 볼 런",
+      "tier": "country",
+      "stats": {
+        "power": 6.5,
+        "speed": 7,
+        "durability": 6,
+        "regeneration": 5,
+        "battleIQ": 8
+      },
+      "haxTraits": [
+        {
+          "type": "domain_sure_hit",
+          "label": "터스크 ACT4 - 회전이 걸린 손톱, 벽과 차원을 넘어 목표를 추적",
+          "mechanism": "한번 발사되면 벽이든 차원이든 뚫고 목표를 끝까지 추적하는 회전(스핀) 손톱이라 사실상 회피가 불가능함 (추적 확정타형 — 고죠·스쿠나·유타·이타치의 확정타와 달리 발사형 원거리 투사체가 근원)",
+          "potency": 15
+        }
+      ],
+      "resistances": [],
+      "avatar": "/characters/johnny.jpg"
+    }
+  ]
+}

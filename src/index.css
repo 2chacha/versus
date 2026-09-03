@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: #020617; /* slate-950 */
+  color: #e2e8f0; /* slate-200 */
+  font-family: "Noto Sans KR", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+
+/* 임팩트 디스플레이 폰트 (승률 숫자 / VS / 타이틀 등 라틴·숫자). */
+.font-display {
+  font-family: "Orbitron", "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+/* WINNER 뱃지 골드 시머 */
+.vn-winner {
+  background: linear-gradient(90deg, #b45309, #fbbf24, #fde68a, #fbbf24, #b45309);
+  background-size: 200% 100%;
+  animation: vn-shimmer 1.8s linear infinite;
+  box-shadow: 0 0 14px rgba(251, 191, 36, 0.6);
+}
+@keyframes vn-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* 분석 중 게이지 (0 → 100% in ~0.7s) */
+.vn-analyze-bar {
+  width: 0%;
+  animation: vn-analyze 0.7s ease-out forwards;
+}
+@keyframes vn-analyze {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* 결과 공개 리빌 */
+.vn-reveal {
+  animation: vn-reveal 0.4s ease-out;
+}
+@keyframes vn-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
