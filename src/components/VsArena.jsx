@@ -13,6 +13,7 @@ import { COLOR_A, COLOR_B, COLOR_FOCUS, STAT_META } from '../lib/constants'
 import { useRoster } from '../context/RosterContext'
 import { CharacterSelect } from './CharacterSelect'
 import FighterCard from './FighterCard'
+import BreakdownReceipt from './BreakdownReceipt'
 
 function VsEmblem({ analyzing }) {
   return (
@@ -49,8 +50,10 @@ export default function VsArena({ aId, bId, onAChange, onBChange, simSignal }) {
   const { characters, overrides } = useRoster()
   const [phase, setPhase] = useState('idle') // idle | analyzing | done
   const [result, setResult] = useState(null)
+  const [reveal, setReveal] = useState(0) // 0→1 카운트업 진행도 (승률 숫자/바 차오름)
   const timerRef = useRef(null)
   const pendingRef = useRef(null)
+  const rafRef = useRef(null)
 
   const charA = characters.find((c) => c.id === aId) || null
   const charB = characters.find((c) => c.id === bId) || null
@@ -83,16 +86,53 @@ export default function VsArena({ aId, bId, onAChange, onBChange, simSignal }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [simSignal])
 
-  // 언마운트 시 타이머 정리.
-  useEffect(() => () => clearTimeout(timerRef.current), [])
+  // 랜덤 대결: 서로 다른 두 명을 뽑아 슬롯만 채움(자동 시뮬 안 함).
+  function randomMatchup() {
+    if (characters.length < 2) return
+    const i = Math.floor(Math.random() * characters.length)
+    let j = Math.floor(Math.random() * (characters.length - 1))
+    if (j >= i) j += 1
+    onAChange(characters[i].id)
+    onBChange(characters[j].id)
+  }
 
   const done = phase === 'done' && !!result
+
+  // 결과 공개 순간 승률 0→최종 카운트업 (약 0.5초, easeOutCubic). 결과가 바뀔 때마다 재생.
+  useEffect(() => {
+    cancelAnimationFrame(rafRef.current)
+    if (!done) {
+      setReveal(0)
+      return
+    }
+    const start = performance.now()
+    const dur = 520
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / dur)
+      setReveal(1 - Math.pow(1 - t, 3))
+      if (t < 1) rafRef.current = requestAnimationFrame(tick)
+    }
+    rafRef.current = requestAnimationFrame(tick)
+    // rAF 는 백그라운드 탭에서 멈추므로, 최종값은 setTimeout 으로도 보장(중간에 탭 전환해도 결과가 0에 갇히지 않음).
+    const settle = setTimeout(() => setReveal(1), dur + 80)
+    return () => {
+      cancelAnimationFrame(rafRef.current)
+      clearTimeout(settle)
+    }
+  }, [done, result])
+
+  // 언마운트 시 타이머/애니메이션 정리.
+  useEffect(() => () => {
+    clearTimeout(timerRef.current)
+    cancelAnimationFrame(rafRef.current)
+  }, [])
+
   const displayWinnerIsA = done ? result.r.winRateA >= result.r.winRateB : true
 
   const aState = done ? (displayWinnerIsA ? 'winner' : 'loser') : 'idle'
   const bState = done ? (!displayWinnerIsA ? 'winner' : 'loser') : 'idle'
-  const aWin = done ? result.r.winRateA : null
-  const bWin = done ? result.r.winRateB : null
+  const aWin = done ? Math.round(result.r.winRateA * reveal) : null
+  const bWin = done ? Math.round(result.r.winRateB * reveal) : null
   const aNotes = done ? result.r.aOnB.notes : null
   const bNotes = done ? result.r.bOnA.notes : null
 
@@ -129,16 +169,27 @@ export default function VsArena({ aId, bId, onAChange, onBChange, simSignal }) {
           <CharacterSelect value={bId} onChange={onBChange} accent={COLOR_B} side="B" />
         </div>
 
-        {/* SIMULATE + 분석 연출 */}
+        {/* SIMULATE + 랜덤 + 분석 연출 */}
         <div className="mt-6 flex flex-col items-center gap-3">
-          <button
-            type="button"
-            onClick={runSimulation}
-            disabled={!canSimulate || phase === 'analyzing'}
-            className="rounded-xl bg-gradient-to-r from-sky-500 to-rose-500 px-8 py-3 text-base font-bold tracking-wide text-white shadow-lg shadow-rose-500/20 transition hover:brightness-110 focus:outline-none disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            ⚔️ SIMULATE BATTLE
-          </button>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={runSimulation}
+              disabled={!canSimulate || phase === 'analyzing'}
+              className="rounded-xl bg-gradient-to-r from-sky-500 to-rose-500 px-8 py-3 text-base font-bold tracking-wide text-white shadow-lg shadow-rose-500/20 transition hover:brightness-110 focus:outline-none disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              ⚔️ SIMULATE BATTLE
+            </button>
+            <button
+              type="button"
+              onClick={randomMatchup}
+              disabled={phase === 'analyzing' || characters.length < 2}
+              title="무작위로 두 캐릭터를 슬롯에 채웁니다 (시뮬레이션은 직접 실행)"
+              className="rounded-xl border border-slate-600 bg-slate-900/60 px-5 py-3 text-base font-bold text-slate-200 transition hover:bg-slate-800 focus:outline-none disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              🎲 랜덤 대결
+            </button>
+          </div>
 
           {phase === 'analyzing' && (
             <div className="w-64">
@@ -159,11 +210,11 @@ export default function VsArena({ aId, bId, onAChange, onBChange, simSignal }) {
       {/* ===== 결과 ===== */}
       {done && (
         <section className="vn-reveal mt-8 space-y-6">
-          {/* 승률 바 */}
-          <div className="overflow-hidden rounded-full border border-slate-700">
+          {/* 승률 바 — 결과 공개 시 reveal(0→1)에 맞춰 채워짐 */}
+          <div className="overflow-hidden rounded-full border border-slate-700 bg-slate-900/60">
             <div className="flex h-3 w-full">
-              <div style={{ width: `${result.r.winRateA}%`, backgroundColor: COLOR_A }} />
-              <div style={{ width: `${result.r.winRateB}%`, backgroundColor: COLOR_B }} />
+              <div style={{ width: `${result.r.winRateA * reveal}%`, backgroundColor: COLOR_A }} />
+              <div style={{ width: `${result.r.winRateB * reveal}%`, backgroundColor: COLOR_B }} />
             </div>
           </div>
 
@@ -235,6 +286,11 @@ export default function VsArena({ aId, bId, onAChange, onBChange, simSignal }) {
                   sub={`${Math.max(result.r.winRateA, result.r.winRateB)}%`}
                 />
               </div>
+
+              {/* 산출 영수증 — 오버라이드가 아닐 때만 (오버라이드는 수동 지정이라 점수 합산과 무관) */}
+              {!result.r.overridden && (
+                <BreakdownReceipt result={result.r} a={result.a} b={result.b} />
+              )}
             </div>
           </div>
         </section>

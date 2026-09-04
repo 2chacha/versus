@@ -57,8 +57,12 @@ function oneSidedHax(attacker, defender) {
 }
 
 export function simulate(A, B) {
-  const powerA = powerScore(A)
-  const powerB = powerScore(B)
+  const tierScoreA = TIER_SCORE[A.tier]
+  const tierScoreB = TIER_SCORE[B.tier]
+  const rawStatScoreA = statScore(A.stats)
+  const rawStatScoreB = statScore(B.stats)
+  const powerA = rawStatScoreA + tierScoreA
+  const powerB = rawStatScoreB + tierScoreB
 
   const aOnB = oneSidedHax(A, B) // A가 B에게 거는 헤스
   const bOnA = oneSidedHax(B, A) // B가 A에게 거는 헤스
@@ -68,6 +72,19 @@ export function simulate(A, B) {
   const baseWinRateA = 1 / (1 + Math.pow(10, (powerB - powerA) / SCALE_FACTOR))
   let finalA = Math.round(baseWinRateA * 100 + netModifier)
   finalA = Math.max(5, Math.min(95, finalA))
+
+  // v1.5: "산출 영수증" UI를 위해 파워 점수를 티어 성분/스탯 성분으로 분리해서 그대로 노출.
+  // 프론트에서 별도로 근사치를 다시 계산하지 말고 이 breakdown 값을 그대로 표시해야
+  // 리포트 텍스트-실제 계산 불일치 버그(과거 발생 이력 있음)가 재발하지 않음.
+  const breakdown = {
+    tierScoreA: Math.round(tierScoreA * 10) / 10,
+    tierScoreB: Math.round(tierScoreB * 10) / 10,
+    tierDiffA: Math.round((tierScoreA - tierScoreB) * 10) / 10, // A 기준(A-B)
+    statScoreA: Math.round(rawStatScoreA * 10) / 10,
+    statScoreB: Math.round(rawStatScoreB * 10) / 10,
+    statDiffA: Math.round((rawStatScoreA - rawStatScoreB) * 10) / 10, // A 기준(A-B)
+    haxNetA: netModifier, // A 기준(A-B), 이미 MODIFIER_CAP 적용됨
+  }
 
   return {
     A: A.name,
@@ -79,6 +96,7 @@ export function simulate(A, B) {
     winRateB: 100 - finalA,
     aOnB,
     bOnA,
+    breakdown,
   }
 }
 

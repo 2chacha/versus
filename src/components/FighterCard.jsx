@@ -131,7 +131,7 @@ export default function FighterCard({ character, side = 'A', state = 'idle', win
         {traits.length > 0 && (
           <div className="mt-3 flex flex-wrap items-center justify-center gap-1.5">
             {traits.map((t, i) => (
-              <HaxBadge key={i} label={t.trait.label} nullified={!t.landed} />
+              <HaxBadge key={i} label={t.trait.label} nullified={!t.landed} potency={t.trait.potency} />
             ))}
           </div>
         )}
