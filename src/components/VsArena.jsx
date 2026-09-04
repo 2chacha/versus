@@ -191,6 +191,14 @@ export default function VsArena({ aId, bId, onAChange, onBChange, simSignal }) {
             </button>
           </div>
 
+          {!canSimulate && phase !== 'analyzing' && (
+            <p className="text-center text-xs text-slate-400">
+              양쪽 슬롯에서 캐릭터를 선택하면{' '}
+              <span className="font-semibold text-slate-200">SIMULATE</span> 가 활성화됩니다.
+              <span className="text-slate-600"> (🎲 랜덤 대결로 자동 편성도 가능)</span>
+            </p>
+          )}
+
           {phase === 'analyzing' && (
             <div className="w-64">
               <div className="mb-1 text-center text-xs tracking-wide text-slate-400">

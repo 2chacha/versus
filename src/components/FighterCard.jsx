@@ -20,8 +20,14 @@ import {
 export default function FighterCard({ character, side = 'A', state = 'idle', winRate = null, haxNotes = null }) {
   if (!character) {
     return (
-      <div className="flex min-h-[220px] w-full items-center justify-center rounded-2xl border-2 border-dashed border-slate-700 p-4 text-center text-sm text-slate-500 sm:min-h-[360px]">
-        {side === 'A' ? '왼쪽 파이터를 선택하세요' : '오른쪽 파이터를 선택하세요'}
+      <div className="flex min-h-[220px] w-full flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-slate-700 p-4 text-center sm:min-h-[360px]">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-dashed border-slate-600 text-3xl text-slate-500">
+          ?
+        </div>
+        <div className="text-sm font-semibold text-slate-400">
+          {side === 'A' ? '왼쪽 파이터 선택' : '오른쪽 파이터 선택'}
+        </div>
+        <div className="text-xs text-slate-600">아래에서 캐릭터를 골라주세요</div>
       </div>
     )
   }

@@ -23,8 +23,8 @@ function TabButton({ active, onClick, children }) {
 
 export default function App() {
   const [view, setView] = useState('arena') // 'arena' | 'map'
-  const [aId, setAId] = useState('gojo')
-  const [bId, setBId] = useState('sukuna')
+  const [aId, setAId] = useState(null) // 첫 진입 시 아무 캐릭터도 선택 안 됨(안내문구 노출)
+  const [bId, setBId] = useState(null)
   const [simSignal, setSimSignal] = useState(0)
 
   // 상성 맵에서 매치업을 아레나로 넘길 때: 선택을 세팅하고 자동 시뮬레이션 트리거.
