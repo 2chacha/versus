@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import VsArena from './components/VsArena'
+import TeamBattle from './components/TeamBattle'
 import NexusMatrix from './components/NexusMatrix'
 import EditView from './components/EditView'
 
@@ -61,6 +62,9 @@ export default function App() {
             <TabButton active={view === 'arena'} onClick={() => setView('arena')}>
               ⚔️ VS 아레나
             </TabButton>
+            <TabButton active={view === 'team'} onClick={() => setView('team')}>
+              ⚔️ 팀전
+            </TabButton>
             <TabButton active={view === 'map'} onClick={() => setView('map')}>
               🗺️ 상성 맵
             </TabButton>
@@ -79,6 +83,7 @@ export default function App() {
             simSignal={simSignal}
           />
         )}
+        {view === 'team' && <TeamBattle />}
         {view === 'map' && <NexusMatrix onOpenInArena={openInArena} />}
         {view === 'edit' && <EditView />}
 
