@@ -115,16 +115,17 @@ export default function VsArena({ aId, bId, onAChange, onBChange, simSignal }) {
     <div>
       {/* ===== 히어로: 캐릭터 셀렉트 카드 ===== */}
       <section>
-        <div className="grid grid-cols-[1fr_auto_1fr] items-stretch gap-2 sm:gap-4">
+        {/* 모바일: 세로 스택(카드 A / VS / 카드 B). sm 이상: 3열 그리드(기존 PC 레이아웃). */}
+        <div className="flex flex-col items-stretch gap-3 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-stretch sm:gap-4">
           <FighterCard character={charA} side="A" state={aState} winRate={aWin} haxNotes={aNotes} />
           <VsEmblem analyzing={phase === 'analyzing'} />
           <FighterCard character={charB} side="B" state={bState} winRate={bWin} haxNotes={bNotes} />
         </div>
 
-        {/* 셀렉트 (카드 아래) */}
-        <div className="mt-4 grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4">
+        {/* 셀렉트 (카드 아래) — 모바일 세로 스택, sm 이상 3열 */}
+        <div className="mt-4 flex flex-col gap-3 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-center sm:gap-4">
           <CharacterSelect value={aId} onChange={onAChange} accent={COLOR_A} side="A" />
-          <div className="w-16 sm:w-20" />
+          <div className="hidden sm:block sm:w-20" />
           <CharacterSelect value={bId} onChange={onBChange} accent={COLOR_B} side="B" />
         </div>
 

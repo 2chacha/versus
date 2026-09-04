@@ -9,7 +9,7 @@ function TabButton({ active, onClick, children }) {
       type="button"
       onClick={onClick}
       className={
-        'rounded-lg px-4 py-2 text-sm font-semibold transition ' +
+        'whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold transition sm:px-4 ' +
         (active
           ? 'bg-slate-800 text-slate-100 shadow-inner'
           : 'text-slate-400 hover:text-slate-200')
@@ -37,7 +37,7 @@ export default function App() {
   return (
     <div className="min-h-full">
       {/* 배경 글로우 */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute left-[-10%] top-[-10%] h-[45vh] w-[45vh] rounded-full bg-sky-500/10 blur-3xl" />
         <div className="absolute bottom-[-10%] right-[-10%] h-[45vh] w-[45vh] rounded-full bg-rose-500/10 blur-3xl" />
       </div>
@@ -57,7 +57,7 @@ export default function App() {
 
         {/* 뷰 전환 탭 */}
         <div className="mb-8 flex justify-center">
-          <div className="inline-flex gap-1 rounded-xl border border-slate-800 bg-slate-900/60 p-1">
+          <div className="flex max-w-full flex-wrap justify-center gap-1 rounded-xl border border-slate-800 bg-slate-900/60 p-1">
             <TabButton active={view === 'arena'} onClick={() => setView('arena')}>
               ⚔️ VS 아레나
             </TabButton>

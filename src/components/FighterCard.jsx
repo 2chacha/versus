@@ -20,7 +20,7 @@ import {
 export default function FighterCard({ character, side = 'A', state = 'idle', winRate = null, haxNotes = null }) {
   if (!character) {
     return (
-      <div className="flex min-h-[360px] flex-1 items-center justify-center rounded-2xl border-2 border-dashed border-slate-700 text-sm text-slate-500">
+      <div className="flex min-h-[220px] w-full items-center justify-center rounded-2xl border-2 border-dashed border-slate-700 p-4 text-center text-sm text-slate-500 sm:min-h-[360px]">
         {side === 'A' ? '왼쪽 파이터를 선택하세요' : '오른쪽 파이터를 선택하세요'}
       </div>
     )
@@ -30,7 +30,8 @@ export default function FighterCard({ character, side = 'A', state = 'idle', win
   const tierColor = TIER_COLOR[character.tier] ?? '#64748b'
   const isWinner = state === 'winner'
   const isLoser = state === 'loser'
-  const skew = side === 'A' ? '-5deg' : '5deg'
+  // 모바일(<sm)에서는 skew 를 없애 트래피조이드가 화면 폭을 넘지 않게, sm 이상에서만 기울임.
+  const skewClass = side === 'A' ? 'skew-x-0 sm:-skew-x-[5deg]' : 'skew-x-0 sm:skew-x-[5deg]'
 
   const traits = haxNotes
     ? haxNotes
@@ -38,17 +39,16 @@ export default function FighterCard({ character, side = 'A', state = 'idle', win
 
   return (
     <div
-      className="relative min-h-[360px] flex-1 transition-transform duration-300"
+      className="relative min-h-[300px] w-full transition-transform duration-300 sm:min-h-[360px]"
       style={{
         transform: isWinner ? 'scale(1.03)' : undefined,
         filter: isLoser ? 'grayscale(1) brightness(0.72)' : undefined,
       }}
     >
-      {/* 스큐된 배경/테두리 레이어 */}
+      {/* 스큐된 배경/테두리 레이어 (skew 는 sm 이상에서만) */}
       <div
-        className="absolute inset-0 overflow-hidden rounded-2xl border-2"
+        className={`absolute inset-0 overflow-hidden rounded-2xl border-2 ${skewClass}`}
         style={{
-          transform: `skewX(${skew})`,
           borderColor: isWinner ? COLOR_GOLD : accent,
           background: `linear-gradient(160deg, ${accent}26, #0b1220 55%, #05070f)`,
           boxShadow: isWinner
@@ -78,7 +78,7 @@ export default function FighterCard({ character, side = 'A', state = 'idle', win
       </div>
 
       {/* 콘텐츠 레이어 (skew 없음) */}
-      <div className="absolute inset-0 flex flex-col items-center px-5 py-5 text-center">
+      <div className="absolute inset-0 flex flex-col items-center px-4 py-5 text-center sm:px-5">
         {isWinner && (
           <div
             className="vn-winner absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-4 py-1 text-xs font-black uppercase tracking-widest text-slate-900 shadow-lg"
@@ -103,8 +103,11 @@ export default function FighterCard({ character, side = 'A', state = 'idle', win
           />
         </div>
 
-        {/* 이름 */}
-        <div className="mt-3 line-clamp-2 text-xl font-black leading-tight text-slate-50">
+        {/* 이름 — 모바일에서 폰트가 좁은 카드에 맞게 clamp 로 줄어들고 2줄까지 줄바꿈 */}
+        <div
+          className="mt-3 line-clamp-2 break-words font-black leading-tight text-slate-50"
+          style={{ fontSize: 'clamp(0.95rem, 3.8vw, 1.25rem)' }}
+        >
           {character.name}
         </div>
 
@@ -141,8 +144,18 @@ export default function FighterCard({ character, side = 'A', state = 'idle', win
             className="font-display leading-none"
             style={{ color: isWinner ? COLOR_GOLD : accent }}
           >
-            <span className="text-6xl font-black tabular-nums">{winRate}</span>
-            <span className="align-top text-2xl font-bold">%</span>
+            <span
+              className="font-black tabular-nums"
+              style={{ fontSize: 'clamp(2.75rem, 12vw, 3.75rem)' }}
+            >
+              {winRate}
+            </span>
+            <span
+              className="align-top font-bold"
+              style={{ fontSize: 'clamp(1.1rem, 5vw, 1.5rem)' }}
+            >
+              %
+            </span>
           </div>
         )}
       </div>
