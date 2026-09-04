@@ -83,10 +83,11 @@ function TeamRoster({ label, accent, ids, byId, eliminatedIds, currentIds, accFa
 }
 
 export default function TeamBattle() {
-  const { characters, byId } = useRoster()
+  const { byId } = useRoster()
 
-  const [teamAIds, setTeamAIds] = useState(() => characters.slice(0, TEAM_SIZE).map((c) => c.id))
-  const [teamBIds, setTeamBIds] = useState(() => characters.slice(TEAM_SIZE, TEAM_SIZE * 2).map((c) => c.id))
+  // 첫 진입 시 빈 슬롯(선택 안내 노출) — 배열 길이는 TEAM_SIZE 로 유지.
+  const [teamAIds, setTeamAIds] = useState(() => Array(TEAM_SIZE).fill(null))
+  const [teamBIds, setTeamBIds] = useState(() => Array(TEAM_SIZE).fill(null))
   const [phase, setPhase] = useState('setup') // setup | analyzing | result | done
   const [bracket, setBracket] = useState(null)
   const [matchIndex, setMatchIndex] = useState(0)
@@ -191,14 +192,18 @@ export default function TeamBattle() {
                   </div>
                 ))}
                 {!teamValid(team.ids) && (
-                  <p className="text-xs text-rose-400">같은 팀에 서로 다른 두 캐릭터를 선택하세요.</p>
+                  <p className="text-xs text-rose-400">
+                    {team.ids.some((id) => !id)
+                      ? '빈 슬롯을 모두 채워주세요.'
+                      : '서로 다른 캐릭터를 선택하세요.'}
+                  </p>
                 )}
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-6 flex justify-center">
+        <div className="mt-6 flex flex-col items-center gap-2">
           <button
             type="button"
             onClick={startBattle}
@@ -207,6 +212,11 @@ export default function TeamBattle() {
           >
             ⚔️ TEAM BATTLE
           </button>
+          {!canStart && (
+            <p className="text-center text-xs text-slate-400">
+              양 팀에 서로 다른 캐릭터 {TEAM_SIZE}명씩 선택하면 시작할 수 있어요.
+            </p>
+          )}
         </div>
       </div>
     )
