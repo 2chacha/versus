@@ -35,7 +35,16 @@ export function CharacterSelect({ value, onChange, accent, side }) {
   }, [])
 
   useEffect(() => {
-    if (open && inputRef.current) inputRef.current.focus()
+    if (open && inputRef.current) {
+      // 터치 우선 기기(모바일/태블릿)에서는 열자마자 검색창에 포커스를 주지 않는다.
+      // 자동 포커스 → 소프트 키보드가 화면 절반을 가리는 문제를 막기 위함.
+      // 목록을 먼저 보고, 검색창을 직접 탭했을 때만 키보드가 뜬다.
+      const coarsePointer =
+        typeof window !== 'undefined' &&
+        typeof window.matchMedia === 'function' &&
+        window.matchMedia('(pointer: coarse)').matches
+      if (!coarsePointer) inputRef.current.focus()
+    }
     if (!open) setQuery('')
   }, [open])
 
