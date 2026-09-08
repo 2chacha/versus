@@ -9,11 +9,13 @@ import {
   Legend,
 } from 'recharts'
 import { resolveMatchup, buildReport } from '../lib/matchup'
+import { buildDecidingFactors, buildCounterfactuals } from '../lib/battleEngine'
 import { COLOR_A, COLOR_B, COLOR_FOCUS, STAT_META } from '../lib/constants'
 import { useRoster } from '../context/RosterContext'
 import { CharacterSelect } from './CharacterSelect'
 import FighterCard from './FighterCard'
 import BreakdownReceipt from './BreakdownReceipt'
+import DecidingFactors from './DecidingFactors'
 
 function VsEmblem({ analyzing }) {
   return (
@@ -46,11 +48,27 @@ function SummaryChip({ label, value, sub }) {
   )
 }
 
+function ResultTabButton({ active, onClick, children }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={
+        'whitespace-nowrap rounded-lg px-4 py-1.5 text-sm font-semibold transition ' +
+        (active ? 'bg-slate-800 text-slate-100 shadow-inner' : 'text-slate-400 hover:text-slate-200')
+      }
+    >
+      {children}
+    </button>
+  )
+}
+
 export default function VsArena({ aId, bId, onAChange, onBChange, simSignal }) {
   const { characters, overrides } = useRoster()
   const [phase, setPhase] = useState('idle') // idle | analyzing | done
   const [result, setResult] = useState(null)
   const [reveal, setReveal] = useState(0) // 0→1 카운트업 진행도 (승률 숫자/바 차오름)
+  const [resultTab, setResultTab] = useState('summary') // summary | factors
   const timerRef = useRef(null)
   const pendingRef = useRef(null)
   const rafRef = useRef(null)
@@ -97,6 +115,22 @@ export default function VsArena({ aId, bId, onAChange, onBChange, simSignal }) {
   }
 
   const done = phase === 'done' && !!result
+
+  // 새 결과가 나오면 항상 "승률 요약" 탭부터 보여줌.
+  useEffect(() => {
+    setResultTab('summary')
+  }, [result])
+
+  // 판정 근거 블록 데이터 — 오버라이드 매치업은 엔진 계산과 승률이 달라 근거 블록을 만들지 않음.
+  // ⚠️ 두 빌더 모두 엔진이 계산한 값만 구조화해서 반환함(프론트에서 서술을 지어내지 않음).
+  const decidingData = useMemo(
+    () => (done && !result.r.overridden ? buildDecidingFactors(result.a, result.b, result.r) : null),
+    [done, result],
+  )
+  const counterfactuals = useMemo(
+    () => (done && !result.r.overridden ? buildCounterfactuals(result.a, result.b) : null),
+    [done, result],
+  )
 
   // 결과 공개 순간 승률 0→최종 카운트업 (약 0.5초, easeOutCubic). 결과가 바뀔 때마다 재생.
   useEffect(() => {
@@ -226,7 +260,22 @@ export default function VsArena({ aId, bId, onAChange, onBChange, simSignal }) {
             </div>
           </div>
 
-          {/* 레이더 + 리포트 */}
+          {/* 결과 탭 — 오버라이드 매치업은 엔진 계산과 승률이 어긋나므로 "판정 근거" 탭을 노출하지 않음 */}
+          {!result.r.overridden && (
+            <div className="flex justify-center">
+              <div className="inline-flex flex-wrap justify-center gap-1 rounded-xl border border-slate-800 bg-slate-900/60 p-1">
+                <ResultTabButton active={resultTab === 'summary'} onClick={() => setResultTab('summary')}>
+                  📊 승률 요약
+                </ResultTabButton>
+                <ResultTabButton active={resultTab === 'factors'} onClick={() => setResultTab('factors')}>
+                  ⚖️ 판정 근거
+                </ResultTabButton>
+              </div>
+            </div>
+          )}
+
+          {/* ===== 탭: 승률 요약 (오버라이드일 땐 탭 없이 이 내용만) ===== */}
+          {(resultTab === 'summary' || result.r.overridden) && (
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-4">
               <h2 className="mb-2 text-sm font-semibold text-slate-300">스탯 비교</h2>
@@ -301,6 +350,17 @@ export default function VsArena({ aId, bId, onAChange, onBChange, simSignal }) {
               )}
             </div>
           </div>
+          )}
+
+          {/* ===== 탭: 판정 근거 (Deciding Factors) ===== */}
+          {resultTab === 'factors' && !result.r.overridden && (
+            <DecidingFactors
+              data={decidingData}
+              cf={counterfactuals}
+              a={result.a}
+              b={result.b}
+            />
+          )}
         </section>
       )}
     </div>
